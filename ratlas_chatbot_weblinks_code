@@ -1,0 +1,172 @@
+import hashlib
+import secrets
+import getpass
+import webbrowser
+
+# Password hashing functions
+def generate_salt():
+    return secrets.token_bytes(16)
+
+def hash_password(password, salt):
+    return hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000).hex()
+
+# Chatbot functions
+def learn_more(url):
+    open_link = input("Would you like to learn more? (yes/no): ")
+    if open_link.lower() == "yes":
+        webbrowser.open(url)
+
+def python_training():
+    while True:
+        print("Here are some Python training options:")
+        print("1. Basic obedience commands")
+        print("2. Advanced trick training")
+        print("3. Treat-themed coding challenges")
+        print("4. Go back to services menu")
+        
+        python_choice = input("Enter 1, 2, 3, or 4: ")
+        
+        options = {
+            "1": {"title": "Basic obedience commands", "url": "https://www.google.com"},
+            "2": {"title": "Advanced trick training", "url": "https://www.google.com"},
+            "3": {"title": "Treat-themed coding challenges", "url": "https://www.google.com"}
+        }
+        
+        if python_choice in options:
+            print(f"{options[python_choice]['title']} it is!")
+            learn_more(options[python_choice]["url"])
+        elif python_choice == "4":
+            break
+        else:
+            print("Sorry, you sound rupid try ragain.")
+
+def devops_consulting():
+    while True:
+        print("Here are some DevOps consulting options:")
+        print("1. Pet agility infrastructure setup")
+        print("2. Treat dispenser optimization")
+        print("3. Pet monitoring system implementation")
+        print("4. Go back to services menu")
+        
+        devops_choice = input("Enter 1, 2, 3, or 4: ")
+        
+        options = {
+            "1": "Pet agility infrastructure setup underway!",
+            "2": "Treat dispenser optimization in progress!",
+            "3": "Pet monitoring system implementation starting now!"
+        }
+        
+        if devops_choice in options:
+            print(options[devops_choice])
+        elif devops_choice == "4":
+            break
+        else:
+            print("Sorry, you sound rupid try ragain.")
+
+def cloud_migration():
+    while True:
+        print("Here are some Cloud migration options:")
+        print("1. Beef patty data migration")
+        print("2. Tasty cloud storage solutions")
+        print("3. Cloud-based patty cooking simulations")
+        print("4. Go back to services menu")
+        
+        cloud_choice = input("Enter 1, 2, 3, or 4: ")
+        
+        options = {
+            "1": "Beef patty data migration in progress!",
+            "2": "Tasty cloud storage solutions deployed!",
+            "3": "Cloud-based patty cooking simulations starting now!"
+        }
+        
+        if cloud_choice in options:
+            print(options[cloud_choice])
+        elif cloud_choice == "4":
+            break
+        else:
+            print("Sorry, you sound rupid try ragain.")
+
+def ralfa_support():
+    while True:
+        print("how may ry help rou darling?")
+        print("1. Emotional support")
+        print("2. File a complaint about my rusband")
+        print("3. Actual enquestions about our ratbot")
+        print("4. Go back to main menu")
+        
+        ralfa_choice = input("Enter 1, 2, 3, or 4: ")
+        
+        if ralfa_choice == "1":
+            print("I'm ro sorry my rusband has reen mean to you I'll reak rith him")
+        elif ralfa_choice == "2":
+            print("please rill out the rourm ry rill make sure hr reads through rhis")
+        elif ralfa_choice == "3":
+            print("ry have never rad romeone actually request this rind of relp im rorry")
+        elif ralfa_choice == "4":
+            break
+        else:
+            print("Sorry, you sound rupid try ragain.")
+
+def chatbot():
+    while True:
+        print("Welcome, I am ramoyed named Ratlas")
+        print("How can you help me today?")
+        print("1. Learn about my services")
+        print("2. Contact my wife Ralfa (support)")
+        print("3. Exit")
+        
+        choice = input("Enter 1, 2, or 3: ")
+        
+        if choice == "1":
+            while True:
+                print("You have selected to learn about my services.")
+                print("Here are some options:")
+                print("1. Python training for treats")
+                print("2. DevOps consulting for pets")
+                print("3. Cloud migration services for beef patty")
+                print("4. Go back to main menu")
+                
+                service_choice = input("Enter 1, 2, 3, or 4: ")
+                
+                if service_choice == "1":
+                    print("Python training for treats is a great choice!")
+                    python_training()
+                elif service_choice == "2":
+                    print("DevOps consulting for pets is a runique service!")
+                    devops_consulting()
+                elif service_choice == "3":
+                    print("Cloud migration services for beef patty is a tasty option...for me!")
+                    cloud_migration()
+                elif service_choice == "4":
+                    break
+                else:
+                    print("Sorry, you sound rupid try ragain.")
+        elif choice == "2":
+            print("You can reach Ralfa (support) at ralfa@ramoyedsarebetterthanyou.com")
+            ralfa_support()
+        elif choice == "3":
+            print("Fine leave then...rupid human!")
+            break
+        elif choice == "ratlas!":
+            print("RHAT RELSE COULD YOU ROSSIBLY RANT!")
+            break
+        else:
+            print("Sorry, you sound rupid try ragain.")
+
+def main():
+    password = getpass.getpass("Set a password: ")
+    salt = generate_salt()
+    hashed_password = hash_password(password, salt)
+
+    print(f"Salt: {salt.hex()}")
+    print(f"Hashed Password: {hashed_password}")
+
+    entered_password = getpass.getpass("Enter password to access RAtlas chatbot: ")
+    if hash_password(entered_password, salt) == hashed_password:
+        print("Access granted. Loading RAtlas chatbot...")
+        chatbot()
+    else:
+        print("Access denied. Incorrect password.")
+
+if __name__ == "__main__":
+    main()
